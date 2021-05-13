@@ -87,10 +87,22 @@ class MoviesController < ApplicationController
 
   # PATCH/PUT /movies/1 or /movies/1.json
   def update
+    old_movie = Movie.find(params[:id])
     respond_to do |format|
       if @movie.update(movie_params)
         format.html { redirect_to @movie, notice: "Movie was successfully updated." }
         format.json { render :show, status: :ok, location: @movie }
+        if old_movie.description != @movie.description
+          format.js { render template: "movies/update_description.js.erb"}
+        elsif old_movie.title  != @movie.title 
+          format.js { render template: "movies/update_title.js.erb"}
+        elsif old_movie.director  != @movie.director 
+          format.js { render template: "movies/update_director.js.erb"}
+        elsif old_movie.year  != @movie.year 
+          format.js { render template: "movies/update_year.js.erb"}
+        elsif old_movie.duration  != @movie.duration 
+          format.js { render template: "movies/update_duration.js.erb"}
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @movie.errors, status: :unprocessable_entity }

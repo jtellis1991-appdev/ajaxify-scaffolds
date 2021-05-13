@@ -1,51 +1,58 @@
 <tr id="<%= dom_id(movie) %>">
-  <td>
-    <div id="<%= dom_id(movie) %>_title">
-        <%= link_to edit_movie_path(movie), remote: true do %>
-          <%= movie.title %>
-        <% end %>
-    </div>    
-  </td>
 
-  <td>
-    <div id="<%= dom_id(movie) %>_year">
-        <%= link_to edit_movie_path(movie), remote: true do %>
-          <%= movie.year %>
-        <% end %>
-    </div>    
-  </td>
+        <td>
+          <div id="<%= dom_id(movie) %>_title">
+            <%= link_to "movies/#{movie.id}/title/edit", remote: true do %>
+              <%= movie.title %>
+            <% end %>
+          </div>
+        </td>
 
-  <td>
-    <div id="<%= dom_id(movie) %>_director_id">
-        <%= link_to edit_movie_path(movie), remote: true do %>
-          <%= movie.director.name %>
-        <% end %>
-    </div>  
-  </td>
+        <td>
+          <div id="<%= dom_id(movie) %>_year">
+            <%= link_to "movies/#{movie.id}/year/edit", remote: true do %>
+                <% if movie.year == 0 %>
+                    Add year
+                <% else %>
+                  <%= movie.year %>
+                <% end %>
+            <% end %> 
+          </div>
+        </td>
 
-  <td>
-    <div id="<%= dom_id(movie) %>_description">
-      <details>
-        <summary>
-          Show description
-        </summary>
-      
-          <p><%= movie.description %></p>
+        <td>
+          <div id="<%= dom_id(movie) %>_director">
+            <%= link_to "movies/#{movie.id}/director/edit", remote: true do %>
+              <%= Director.find(movie.director_id).name %>
+            <% end %>
+          </div>
+        </td>
 
-        <%= link_to edit_movie_path(movie), remote: true do %>
-          Edit
-        <% end %> 
-      </details>
-    </div>
-  </td>
+        <td>      
+          <div id="<%= dom_id(movie) %>_description">
+              <details>
+                <summary>
+                  Show description
+                </summary>
+                  <p><%= movie.description %></p>
+                <%= link_to "movies/#{movie.id}/description/edit", remote: true do %>
+                  Edit
+                <% end %> 
+              </details>
+          </div>
+        </td>
 
-  <td>
-    <div id="<%= dom_id(movie) %>_duration">
-        <%= link_to edit_movie_path(movie), remote: true do %>
-          <%= movie.duration %> minutes
-        <% end %>
-    </div>    
-  </td>
+        <td>
+          <div id="<%= dom_id(movie) %>_duration">
+          <%= link_to "movies/#{movie.id}/duration/edit", remote: true do %>
+              <% if movie.duration == 0 %>
+                Add duration
+              <% else %>
+                <%= movie.duration %> minutes
+              <% end %>
+          <% end %> 
+          </div>
+        </td>
 
   <td>
     <%= link_to movie_path(movie), method: :delete, remote: true do %>
