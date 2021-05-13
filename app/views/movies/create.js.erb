@@ -1,0 +1,13 @@
+var added_movie = $("<%= j(render 'movies/movie', movie: @movie) %>");
+
+added_movie.hide();
+
+$("#<%= dom_id(Movie.find(Movie.last.id - 1)) %>").before(added_movie);
+
+added_movie.slideDown();
+
+$("#movie_title").val("");
+$("#movie_year").val("");
+$("#movie_description").val("");
+$("#movie_duration").val("");
+$("#movie_director_id").val("<%= Director.all.order(:name => :asc).first.id %>");

@@ -4,6 +4,7 @@ class MoviesController < ApplicationController
   # GET /movies or /movies.json
   def index
     @movies = Movie.all
+    @movie = Movie.new
   end
 
   # GET /movies/1 or /movies/1.json
@@ -22,11 +23,13 @@ class MoviesController < ApplicationController
   # POST /movies or /movies.json
   def create
     @movie = Movie.new(movie_params)
+    @movie.id = Movie.last.id + 1
 
     respond_to do |format|
       if @movie.save
         format.html { redirect_to @movie, notice: "Movie was successfully created." }
         format.json { render :show, status: :created, location: @movie }
+        format.js
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @movie.errors, status: :unprocessable_entity }
@@ -53,6 +56,7 @@ class MoviesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to movies_url, notice: "Movie was successfully destroyed." }
       format.json { head :no_content }
+      format.js
     end
   end
 
