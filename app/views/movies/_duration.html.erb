@@ -1,0 +1,9 @@
+          <div id="<%= dom_id(movie) %>_duration">
+          <%= link_to "movies/#{movie.id}/duration/edit", remote: true do %>
+              <% if movie.duration == 0 %>
+                Add duration
+              <% else %>
+                <%= movie.duration %> minutes
+              <% end %>
+          <% end %> 
+          </div>

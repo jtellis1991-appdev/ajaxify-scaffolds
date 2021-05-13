@@ -1,28 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Movies</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Year</th>
-      <th>Director</th>
-      <th>Description</th>
-      <th>Duration</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-      <tr>
-        <%= render "movies/form", movie: @movie, list_of_directors: Director.all.order(:name => :asc).map{ |director| [director.name, director.id]}  %>
-      </tr>
-  </tbody>
-
-  <tbody id="movies">
-    <% @movies.order(:id => :desc).each do |movie| %>
-      <tr id="<%= dom_id(movie) %>">
+<tr id="<%= dom_id(movie) %>">
 
         <td>
           <div id="<%= dom_id(movie) %>_title">
@@ -78,9 +54,8 @@
           </div>
         </td>
 
-        <td><%= link_to 'Destroy', movie, method: :delete, remote: true %></td>
-      </tr>
+  <td>
+    <%= link_to movie_path(movie), method: :delete, remote: true do %>
+      Destroy
     <% end %>
-  </tbody>
-</table>
-
+</tr>
