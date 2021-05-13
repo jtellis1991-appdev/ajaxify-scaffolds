@@ -1,0 +1,1 @@
+$("#<%= dom_id(@movie) %>_director").replaceWith("<%= j(render("movies/form_director", movie: @movie, list_of_directors: Director.all.order(:name => :asc).map{ |director| [director.name, director.id]}))%>");

@@ -18,12 +18,60 @@ class MoviesController < ApplicationController
 
   # GET /movies/1/edit
   def edit
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def edit_duration
+    @movie = Movie.find(params[:id]) 
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def edit_year
+    @movie = Movie.find(params[:id]) 
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def edit_director
+    @movie = Movie.find(params[:id]) 
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def edit_description
+    @movie = Movie.find(params[:id]) 
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def edit_title
+    @movie = Movie.find(params[:id]) 
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # POST /movies or /movies.json
   def create
     @movie = Movie.new(movie_params)
     @movie.id = Movie.last.id + 1
+    @movie.title = !@movie.title.empty? ? @movie.title : "Add title"
+    @movie.duration = !@movie.duration.nil? ? @movie.duration : 0
+    @movie.year = !@movie.year.nil? ? @movie.year : 0
+    @movie.description = !@movie.description.empty? ? @movie.description : "Add description"
 
     respond_to do |format|
       if @movie.save
